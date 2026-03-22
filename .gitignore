@@ -1,0 +1,11 @@
+# Gleam
+*.beam
+*.ez
+/build
+erl_crash.dump
+
+# Local Erlang environment
+.erlang/
+
+# Direnv
+.envrc
