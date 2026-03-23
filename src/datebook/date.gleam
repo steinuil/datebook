@@ -67,7 +67,7 @@ fn range_rec(from: Date, to: Date, acc: List(Date)) -> List(Date) {
 
 /// Returns the inclusive list of dates between `from` and `to`.
 /// 
-/// Fails if `from` > `to`.
+/// Fails if `from` > `to` and when `from` or `to` are invalid dates.
 ///
 /// # Examples
 ///
@@ -93,7 +93,9 @@ fn range_rec(from: Date, to: Date, acc: List(Date)) -> List(Date) {
 /// ```
 pub fn range(from: Date, to: Date) -> Result(List(Date), Nil) {
   use <- bool.guard(
-    calendar.naive_date_compare(from, to) == order.Gt,
+    !calendar.is_valid_date(from)
+      || !calendar.is_valid_date(to)
+      || calendar.naive_date_compare(from, to) == order.Gt,
     Error(Nil),
   )
 
