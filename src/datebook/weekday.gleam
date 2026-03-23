@@ -1,5 +1,6 @@
 //// The day of the week.
 
+import gleam/int
 import gleam/time/calendar.{type Date}
 import gleam/time/timestamp
 
@@ -196,5 +197,101 @@ pub fn days_since(day: Weekday, since: Weekday) -> Int {
     | Saturday, Friday
     | Sunday, Saturday
     -> 6
+  }
+}
+
+/// Returns the weekday corresponding to the number of `days` since `start`.
+///
+/// If `days` is not between `0` and `6`, it will wrap around modulo 7.
+///
+/// # Examples
+///
+/// ```gleam
+/// 2 |> from_days_since(Monday)
+/// // -> Wednesday
+/// ```
+///
+/// ```gleam
+/// -1 |> from_days_since(Sunday)
+/// // -> Saturday
+/// ```
+///
+/// ```gleam
+/// 0 |> from_days_since(Thursday)
+/// // -> Thursday
+/// ```
+///
+/// ```gleam
+/// 7 |> from_days_since(Tuesday)
+/// // -> Tuesday
+/// ```
+pub fn from_days_since(days: Int, start: Weekday) -> Weekday {
+  let assert Ok(days) = days |> int.modulo(7)
+
+  case start, days {
+    Monday, 0
+    | Sunday, 1
+    | Saturday, 2
+    | Friday, 3
+    | Thursday, 4
+    | Wednesday, 5
+    | Tuesday, 6
+    -> Monday
+
+    Monday, 1
+    | Sunday, 2
+    | Saturday, 3
+    | Friday, 4
+    | Thursday, 5
+    | Wednesday, 6
+    | Tuesday, 0
+    -> Tuesday
+
+    Monday, 2
+    | Sunday, 3
+    | Saturday, 4
+    | Friday, 5
+    | Thursday, 6
+    | Wednesday, 0
+    | Tuesday, 1
+    -> Wednesday
+
+    Monday, 3
+    | Sunday, 4
+    | Saturday, 5
+    | Friday, 6
+    | Thursday, 0
+    | Wednesday, 1
+    | Tuesday, 2
+    -> Thursday
+
+    Monday, 4
+    | Sunday, 5
+    | Saturday, 6
+    | Friday, 0
+    | Thursday, 1
+    | Wednesday, 2
+    | Tuesday, 3
+    -> Friday
+
+    Monday, 5
+    | Sunday, 6
+    | Saturday, 0
+    | Friday, 1
+    | Thursday, 2
+    | Wednesday, 3
+    | Tuesday, 4
+    -> Saturday
+
+    Monday, 6
+    | Sunday, 0
+    | Saturday, 1
+    | Friday, 2
+    | Thursday, 3
+    | Wednesday, 4
+    | Tuesday, 5
+    -> Sunday
+
+    _, _ -> panic
   }
 }

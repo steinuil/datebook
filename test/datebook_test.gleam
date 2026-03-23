@@ -24,6 +24,12 @@ pub fn weekday_days_since_test() {
   assert weekday.Wednesday |> weekday.days_since(weekday.Sunday) == 3
 }
 
+pub fn weekday_from_days_since_test() {
+  assert -1 |> weekday.from_days_since(weekday.Sunday) == weekday.Saturday
+  assert 1 |> weekday.from_days_since(weekday.Monday) == weekday.Tuesday
+  assert 2 |> weekday.from_days_since(weekday.Monday) == weekday.Wednesday
+}
+
 pub fn month_last_day_test() {
   assert month.last_day(calendar.February, 2024) == 29
   assert month.last_day(calendar.February, 2025) == 28
@@ -87,10 +93,13 @@ pub fn readme_test() {
   // Get the last day of a month
   assert month.last_day(calendar.February, 2024) == 29
 
-  // Convert a weekday to a number in Europe
+  // Convert a weekday to and from a number in Europe
   assert weekday.Thursday |> weekday.days_since(weekday.Monday) == 3
+  assert 3 |> weekday.from_days_since(weekday.Monday) == weekday.Thursday
+
   // ...or in Canada
   assert weekday.Thursday |> weekday.days_since(weekday.Sunday) == 4
+  assert 4 |> weekday.from_days_since(weekday.Sunday) == weekday.Thursday
 
   // Get a range of dates
   assert date.range(
