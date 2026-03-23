@@ -34,11 +34,11 @@ pub fn main() {
 
   // Convert a weekday to and from a number in Europe
   assert weekday.Thursday |> weekday.days_since(weekday.Monday) == 3
-  assert 3 |> weekday.days_since(weekday.Monday) == weekday.Thursday
+  assert 3 |> weekday.from_days_since(weekday.Monday) == weekday.Thursday
 
   // ...or in Canada
   assert weekday.Thursday |> weekday.days_since(weekday.Sunday) == 4
-  assert 4 |> weekday.days_since(weekday.Sunday) == weekday.Thursday
+  assert 4 |> weekday.from_days_since(weekday.Sunday) == weekday.Thursday
 
   // Get a range of dates
   assert date.range(
