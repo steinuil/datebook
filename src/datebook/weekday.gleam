@@ -110,7 +110,7 @@ pub fn previous(weekday: Weekday) -> Weekday {
   }
 }
 
-/// Returns the number of days elapsed between `right` and `left`.
+/// Returns the number of days elapsed between `since` and `day` in a `0..=6` range.
 ///
 /// You can use this function to map a weekday to a number based on the
 /// first day of the week in a given region (e.g. Monday for Europe,
