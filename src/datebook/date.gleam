@@ -5,7 +5,10 @@ import gleam/bool
 import gleam/order
 import gleam/time/calendar.{type Date}
 
-/// Returns the next `Date` for a given `Date`.
+/// Returns the next date for a given `Date`.
+///
+/// Will return a nonsensical result if the provided `Date` is not valid.
+/// Validate it with `calendar.is_valid_date` first!
 ///
 /// # Examples
 ///
@@ -27,7 +30,10 @@ pub fn next(date: Date) -> Date {
   calendar.Date(year, month, day)
 }
 
-/// Returns the previous `Date` for a given `Date`.
+/// Returns the previous date for a given `Date`.
+///
+/// Will return a nonsensical result if the provided `Date` is not valid.
+/// Validate it with `calendar.is_valid_date` first!
 ///
 /// # Examples
 ///
